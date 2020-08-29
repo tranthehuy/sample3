@@ -31,7 +31,7 @@ const mongoSchema = new Schema({
 
 class PostClass {
   static async list({ offset = 0, limit = 10, userId } = {}) {
-    const posts = await this.find({ userId })
+    const posts = await this.find(userId ? { userId } : {})
       .sort({ createdAt: -1 })
       .skip(offset)
       .limit(limit);
