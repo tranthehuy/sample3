@@ -1,16 +1,17 @@
 function routesWithSlug({ server, app }) {
-  server.get("/admin/edit-book/:slug", (req, res) => {
+  server.get("/admin/edit-post/:slug", (req, res) => {
     const { slug } = req.params;
-    app.render(req, res, "/admin/edit-book", { slug });
+    app.render(req, res, "/admin/edit-post", { slug });
   });
 
-  server.get("/admin/book-detail/:slug", (req, res) => {
+  server.get("/admin/post-detail/:slug", (req, res) => {
     const { slug } = req.params;
-    app.render(req, res, "/admin/book-detail", { slug });
+    app.render(req, res, "/admin/post-detail", { slug });
   });
 
-  server.get("/books/:slug", (req, res) => {
-    res.redirect(`/books/${req.params.slug}/introduction`);
+  server.get("/posts/:slug", (req, res) => {
+    const { slug } = req.params;
+    app.render(req, res, "/post-detail", { slug });
   });
 }
 

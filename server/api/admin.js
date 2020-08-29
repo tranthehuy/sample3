@@ -18,7 +18,7 @@ router.use((req, res, next) => {
 
 router.get("/posts", async (req, res) => {
   try {
-    const posts = await Post.list();
+    const posts = await Post.list({ userId: req.user.id });
     res.json(posts);
   } catch (err) {
     res.json({ error: err.message || err.toString() });

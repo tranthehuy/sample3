@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -11,6 +12,7 @@ import { red } from "@material-ui/core/colors";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: 10,
+    cursor: "pointer",
   },
   media: {
     height: 0,
@@ -22,30 +24,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeReviewCard(props) {
-  const { name, content } = props.data;
+  const { name, content, slug } = props.data;
   const classes = useStyles();
-
+  console.log(`/posts/${slug}`);
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        title={name}
-        subheader="September 14, 2020"
-      />
-      <CardMedia
-        className={classes.media}
-        image={`https://source.unsplash.com/random?nature,water,${new Date().getTime()}`}
-        title="Unsplash Source"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {content}
-        </Typography>
-      </CardContent>
-    </Card>
+    <Link href={`/posts/${slug}`}>
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              R
+            </Avatar>
+          }
+          title={name}
+          subheader="September 14, 2020"
+        />
+        <CardMedia
+          className={classes.media}
+          image={`https://source.unsplash.com/random?nature,water,${new Date().getTime()}`}
+          title="Unsplash Source"
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {content}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }

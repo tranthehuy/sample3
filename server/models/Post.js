@@ -23,11 +23,15 @@ const mongoSchema = new Schema({
   content: {
     type: String,
   },
+
+  userId: {
+    type: String,
+  },
 });
 
 class PostClass {
-  static async list({ offset = 0, limit = 10 } = {}) {
-    const posts = await this.find({})
+  static async list({ offset = 0, limit = 10, userId } = {}) {
+    const posts = await this.find({ userId })
       .sort({ createdAt: -1 })
       .skip(offset)
       .limit(limit);
@@ -45,13 +49,14 @@ class PostClass {
     return post;
   }
 
-  static async add({ name, content }) {
+  static async add({ name, content, userId }) {
     const slug = await generateSlug(this, name);
 
     return this.create({
       name,
       slug,
       content,
+      userId,
       createdAt: new Date(),
     });
   }
