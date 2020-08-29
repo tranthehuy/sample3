@@ -17,8 +17,9 @@ const logger = require("./logs");
 require("dotenv").config();
 
 const dev = process.env.NODE_ENV !== "production";
+const host = process.env.HOST || "http://localhost";
 const port = process.env.PORT || 8000;
-const ROOT_URL = dev ? `http://localhost:${port}` : "";
+const ROOT_URL = dev ? `${host}:${port}` : "";
 
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 
