@@ -9,9 +9,9 @@ import { styleToolbar, styleRaisedButton } from "../lib/SharedStyles";
 
 const optionsMenuCustomer = [
   {
-    text: "My books",
-    href: "/customer/my-books",
-    as: "/my-books",
+    text: "My posts",
+    href: "/customer/my-posts",
+    as: "/customer/my-posts",
   },
   {
     text: "Log out",
