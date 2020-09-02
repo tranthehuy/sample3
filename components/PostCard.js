@@ -34,7 +34,7 @@ export default function RecipeReviewCard(props) {
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
-              R
+              VN
             </Avatar>
           }
           title={name}

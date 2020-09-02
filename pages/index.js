@@ -6,7 +6,9 @@ import Header from "../components/HomeHeader";
 import Footer from "../components/HomeFooter";
 import PostList from "../components/PostList";
 
-import { styleH1 } from "../lib/SharedStyles";
+import InputButton from "../components/InputButton";
+
+import { section } from "../lib/SharedStyles";
 import withAuth from "../lib/withAuth";
 
 const Index = ({ user }) => (
@@ -22,11 +24,11 @@ const Index = ({ user }) => (
     </Head>
     <Header user={user} />
     <div style={{ padding: "10px 8%", fontSize: "15px", minHeight: "100vh" }}>
-      <Grid container direction="row" justify="space-around" align="flex-start">
-        <Grid item sm={12} xs={12} style={{ textAlign: "center" }}>
-          <h1 style={styleH1}>Tự học online</h1>
+      <div style={section}>
+        <Grid spacing={2} container direction="row" justify="space-around" align="flex-start">
+          <InputButton />
         </Grid>
-      </Grid>
+      </div>
       <Grid
         spacing={1}
         container
