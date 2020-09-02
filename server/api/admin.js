@@ -2,7 +2,7 @@ const express = require("express");
 
 const Post = require("../models/Post");
 const User = require("../models/User");
-
+const Comment = require("../models/Comment");
 const logger = require("../logs");
 
 const router = express.Router();
@@ -69,6 +69,18 @@ router.post("/users/search", async (req, res) => {
     const users = await User.search(query);
     res.json({ users });
   } catch (err) {
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
+router.post("/posts/:id/comments", async (req, res) => {
+  try {
+    const comment = await Comment.add(
+      Object.assign({ userId: req.user.id, postId: req.params.id }, req.body)
+    );
+    res.json(comment);
+  } catch (err) {
+    logger.error(err);
     res.json({ error: err.message || err.toString() });
   }
 });

@@ -7,8 +7,9 @@ import Head from "next/head";
 import { getPostDetail } from "../lib/api/public";
 import withAuth from "../lib/withAuth";
 import notify from "../lib/notifier";
+import CommentList from "../components/CommentList";
 
-const MyPost = ({ post, error }) => {
+const MyPost = ({ post, error, user }) => {
   if (error) {
     notify(error);
     return <Error statusCode={500} />;
@@ -37,6 +38,11 @@ const MyPost = ({ post, error }) => {
 
       <h2>{post.name}</h2>
       <div>{post.content}</div>
+      <hr />
+      <p>
+        <b>Feeling space</b>
+      </p>
+      <CommentList postId={post._id} user={user} />
     </div>
   );
 };

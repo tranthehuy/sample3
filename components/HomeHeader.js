@@ -41,8 +41,8 @@ function Header({ user }) {
           justify="space-around"
           alignItems="center"
         >
-          <Grid item sm={6} xs={3} style={{ textAlign: "left" }}>
-            TuHocOnline.com
+          <Grid item sm={6} xs={1} style={{ textAlign: "left" }}>
+            <a href="/">TuHocOnline.com</a>
           </Grid>
           <Grid item sm={6} xs={9} style={{ textAlign: "right" }}>
             {user ? (

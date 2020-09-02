@@ -51,7 +51,7 @@ function Header({ user, hideHeader, next }) {
           <Grid item sm={6} xs={1} style={{ textAlign: "left" }}>
             <a href="/">TuHocOnline.com</a>
           </Grid>
-          <Grid item sm={4} xs={9} style={{ textAlign: "right" }}>
+          <Grid item sm={6} xs={9} style={{ textAlign: "right" }}>
             {user ? (
               <div style={{ whiteSpace: "nowrap" }}>
                 {!user.isAdmin ? (

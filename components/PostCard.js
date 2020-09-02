@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import moment from "moment";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeReviewCard(props) {
-  const { name, content, slug } = props.data;
+  const { name, content, slug, createdAt } = props.data;
   const classes = useStyles();
   console.log(`/posts/${slug}`);
   return (
@@ -37,7 +38,7 @@ export default function RecipeReviewCard(props) {
             </Avatar>
           }
           title={name}
-          subheader="September 14, 2020"
+          subheader={moment(createdAt).fromNow()}
         />
         <CardMedia
           className={classes.media}
