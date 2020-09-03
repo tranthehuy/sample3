@@ -21,7 +21,7 @@ const optionsMenuCustomer = [
 
 const optionsMenuAdmin = [
   {
-    text: "Admin",
+    text: "Admin Panel",
     href: "/admin",
   },
   {

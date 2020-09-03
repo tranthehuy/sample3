@@ -9,7 +9,7 @@ import withAuth from "../lib/withAuth";
 import notify from "../lib/notifier";
 import CommentList from "../components/CommentList";
 
-const MyPost = ({ post, error, user }) => {
+const PostDetail = ({ post, error, user }) => {
   if (error) {
     notify(error);
     return <Error statusCode={500} />;
@@ -32,6 +32,7 @@ const MyPost = ({ post, error, user }) => {
           minHeight: 320,
           textAlign: "center",
           backgroundSize: "cover",
+          backgroundPosition: "center",
           backgroundImage: `url(https://source.unsplash.com/random/1080x720?nature,water,${new Date().getTime()})`,
         }}
       ></div>
@@ -47,7 +48,7 @@ const MyPost = ({ post, error, user }) => {
   );
 };
 
-MyPost.propTypes = {
+PostDetail.propTypes = {
   post: PropTypes.shape({
     name: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
@@ -56,12 +57,12 @@ MyPost.propTypes = {
   error: PropTypes.string,
 };
 
-MyPost.defaultProps = {
+PostDetail.defaultProps = {
   post: null,
   error: null,
 };
 
-class MyPostWithData extends React.Component {
+class PostDetailWithData extends React.Component {
   static propTypes = {
     slug: PropTypes.string.isRequired,
   };
@@ -90,8 +91,8 @@ class MyPostWithData extends React.Component {
   }
 
   render() {
-    return <MyPost {...this.props} {...this.state} />;
+    return <PostDetail {...this.props} {...this.state} />;
   }
 }
 
-export default withAuth(MyPostWithData);
+export default withAuth(PostDetailWithData);

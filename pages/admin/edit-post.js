@@ -48,8 +48,8 @@ class EditPost extends React.Component {
       notify("Saved");
       NProgress.done();
       Router.push(
-        `/admin/post-detail?slug=${editedPost.slug}`,
-        `/admin/post-detail/${editedPost.slug}`
+        `/post-detail?slug=${editedPost.slug}`,
+        `/post-detail/${editedPost.slug}`
       );
     } catch (err) {
       notify(err);

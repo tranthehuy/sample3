@@ -4,7 +4,7 @@ import notify from "../lib/notifier";
 import { getPostList } from "../lib/api/public";
 import PostCard from "./PostCard";
 
-export default class PostList extends React.Component {
+export default class PostGridView extends React.Component {
   state = {
     posts: [],
   };

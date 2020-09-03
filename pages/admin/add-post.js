@@ -21,8 +21,8 @@ class AddPost extends React.Component {
         notify("Synced");
         NProgress.done();
         Router.push(
-          `/admin/post-detail?slug=${book.slug}`,
-          `/admin/post-detail/${book.slug}`
+          `/post-detail?slug=${book.slug}`,
+          `/post-detail/${book.slug}`
         );
       } catch (err) {
         notify(err);

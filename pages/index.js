@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 
 import Header from "../components/HomeHeader";
 import Footer from "../components/HomeFooter";
-import PostList from "../components/PostList";
+import PostGridView from "../components/PostGridView";
 
 import InputButton from "../components/InputButton";
 
@@ -25,7 +25,13 @@ const Index = ({ user }) => (
     <Header user={user} />
     <div style={{ padding: "10px 8%", fontSize: "15px", minHeight: "100vh" }}>
       <div style={section}>
-        <Grid spacing={2} container direction="row" justify="space-around" align="flex-start">
+        <Grid
+          spacing={2}
+          container
+          direction="row"
+          justify="space-around"
+          align="flex-start"
+        >
           <InputButton />
         </Grid>
       </div>
@@ -36,7 +42,7 @@ const Index = ({ user }) => (
         justify="space-around"
         align="flex-start"
       >
-        <PostList />
+        <PostGridView />
       </Grid>
     </div>
     <Footer />
