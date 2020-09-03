@@ -7,6 +7,13 @@ export default class InputButton extends React.Component {
     content: "",
   };
 
+  _handleKeyDown = (e) => {
+    const { onClick } = this.props;
+    if (e.key === "Enter") {
+      if (onClick) onClick(this.state.content);
+    }
+  };
+
   render() {
     const {
       placeholder = "What do you wanna see?",
@@ -23,6 +30,7 @@ export default class InputButton extends React.Component {
             onChange={(evt) => {
               this.setState({ content: evt.target.value });
             }}
+            onKeyDown={this._handleKeyDown}
           />
         </Grid>
         <Grid item sm={4} xs={12}>

@@ -10,13 +10,17 @@ export default class PostGridView extends React.Component {
     posts: [],
   };
 
-  async componentDidMount() {
+  fetchData = async (searchQuery) => {
     try {
-      const { posts } = await getPostList();
+      const { posts } = await getPostList(searchQuery);
       this.setState({ posts });
     } catch (err) {
       notify(err);
     }
+  };
+
+  async componentDidMount() {
+    this.fetchData("");
   }
 
   render() {
@@ -30,7 +34,9 @@ export default class PostGridView extends React.Component {
             justify="space-around"
             align="flex-start"
           >
-            <InputButton />
+            <InputButton
+              onClick={(searchQuery) => this.fetchData(searchQuery)}
+            />
           </Grid>
         </div>
         <Grid

@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/posts", async (req, res) => {
   try {
-    const posts = await Post.list();
+    const posts = await Post.list({ query: req.query.query });
     res.json(posts);
   } catch (err) {
     res.json({ error: err.message || err.toString() });

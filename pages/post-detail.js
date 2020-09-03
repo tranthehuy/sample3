@@ -19,8 +19,6 @@ const PostDetail = ({ post, error, user }) => {
     return null;
   }
 
-  const { chapters = [] } = post;
-
   return (
     <div style={{ padding: "10px 45px" }}>
       <Head>

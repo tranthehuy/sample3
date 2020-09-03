@@ -30,8 +30,17 @@ const mongoSchema = new Schema({
 });
 
 class PostClass {
-  static async list({ offset = 0, limit = 10, userId } = {}) {
-    const posts = await this.find(userId ? { userId } : {})
+  static async list({ offset = 0, limit = 10, userId, query } = {}) {
+    const byPassedSpace = `.*${query}.*`;
+    const regex = new RegExp(["^", byPassedSpace, "$"].join(""), "i");
+    console.log("byPassedSpace", byPassedSpace);
+    const posts = await this.find(
+      userId
+        ? { userId }
+        : {
+            $or: [{ name: { $regex: regex } }, { content: { $regex: regex } }],
+          }
+    )
       .sort({ createdAt: -1 })
       .skip(offset)
       .limit(limit);
