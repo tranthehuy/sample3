@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   postId: {
-    type : mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
 
@@ -32,6 +32,10 @@ class CommentClass {
     return { comments };
   }
 
+  static async getById({ id } = {}) {
+    return await this.findById(id);
+  }
+
   static async add({ content, postId, userId }) {
     return this.create({
       postId,
@@ -39,6 +43,37 @@ class CommentClass {
       userId,
       createdAt: new Date(),
     });
+  }
+
+  static async edit({ id, content }) {
+    const comment = await this.findById(id);
+
+    if (!comment) {
+      throw new Error("Not found");
+    }
+
+    const modifier = {
+      content,
+    };
+
+    const editedComment = await this.findOneAndUpdate(
+      { _id: id },
+      { $set: modifier }
+    );
+
+    return editedComment;
+  }
+
+  static async delete({ id }) {
+    const comment = await this.findById(id);
+
+    if (!comment) {
+      throw new Error("Not found");
+    }
+
+    const deletedComment = await this.deleteOne({ _id: id });
+
+    return deletedComment;
   }
 }
 

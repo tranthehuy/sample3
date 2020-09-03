@@ -85,4 +85,36 @@ router.post("/posts/:id/comments", async (req, res) => {
   }
 });
 
+router.put("/posts/:postId/comments/:id", async (req, res) => {
+  try {
+    const originalComment = await Comment.getById({ id: req.params.id });
+    if (originalComment.userId !== req.user.id) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const comment = await Comment.edit(
+      Object.assign({ id: req.params.id }, req.body)
+    );
+    res.json(comment);
+  } catch (err) {
+    logger.error(err);
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
+router.delete("/posts/:postId/comments/:id", async (req, res) => {
+  try {
+    const originalComment = await Comment.getById({ id: req.params.id });
+    if (originalComment.userId !== req.user.id) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const comment = await Comment.delete({ id: req.params.id });
+    res.json(comment);
+  } catch (err) {
+    logger.error(err);
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
 module.exports = router;
