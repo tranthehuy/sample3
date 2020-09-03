@@ -1,14 +1,8 @@
 import PropTypes from "prop-types";
 import Head from "next/head";
-import Grid from "@material-ui/core/Grid";
-
 import Header from "../components/HomeHeader";
 import Footer from "../components/HomeFooter";
 import PostGridView from "../components/PostGridView";
-
-import InputButton from "../components/InputButton";
-
-import { section } from "../lib/SharedStyles";
 import withAuth from "../lib/withAuth";
 
 const Index = ({ user }) => (
@@ -23,28 +17,7 @@ const Index = ({ user }) => (
       />
     </Head>
     <Header user={user} />
-    <div style={{ padding: "10px 8%", fontSize: "15px", minHeight: "100vh" }}>
-      <div style={section}>
-        <Grid
-          spacing={2}
-          container
-          direction="row"
-          justify="space-around"
-          align="flex-start"
-        >
-          <InputButton />
-        </Grid>
-      </div>
-      <Grid
-        spacing={1}
-        container
-        direction="row"
-        justify="space-around"
-        align="flex-start"
-      >
-        <PostGridView />
-      </Grid>
-    </div>
+    <PostGridView />
     <Footer />
   </div>
 );
