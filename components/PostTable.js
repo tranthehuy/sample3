@@ -14,7 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-const PostTable = ({ posts }) => (
+const PostTable = ({ posts, onRemove }) => (
   <div style={{ padding: "10px 45px" }}>
     <Grid container>
       <Grid item xs={12} sm={12}>
@@ -48,13 +48,22 @@ const PostTable = ({ posts }) => (
                       <p>{row.content}</p>
                     </TableCell>
                     <TableCell align="right">
-                      <Button startIcon={<Icon>edit</Icon>} variant="contained">
-                        Edit
-                      </Button>
+                      <Link
+                        as={`/admin/edit-post/${row.slug}`}
+                        href={`/admin/edit-post?slug=${row.slug}`}
+                      >
+                        <Button
+                          startIcon={<Icon>edit</Icon>}
+                          variant="contained"
+                        >
+                          Edit
+                        </Button>
+                      </Link>
                       <span>&nbsp;&nbsp;</span>
                       <Button
                         startIcon={<Icon>delete</Icon>}
                         variant="contained"
+                        onClick={() => (onRemove ? onRemove(row) : true)}
                       >
                         Remove
                       </Button>

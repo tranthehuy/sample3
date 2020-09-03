@@ -11,15 +11,26 @@ class IndexWithData extends React.Component {
     posts: [],
   };
 
-  async componentDidMount() {
+  fetchData = async () => {
     try {
       const { posts } = await getPostList();
-
       this.setState({ posts }); // eslint-disable-line
     } catch (err) {
       notify(err);
     }
+  };
+
+  async componentDidMount() {
+    this.fetchData();
   }
+
+  removePost = (post) => {
+    deletePost(post._id)
+      .then(() => {
+        this.fetchData();
+      })
+      .catch((e) => notify(e.message));
+  };
 
   render() {
     return (
@@ -28,7 +39,7 @@ class IndexWithData extends React.Component {
           <title>Customer</title>
           <meta name="description" content="Settings for Customer" />
         </Head>
-        <PostTable {...this.props} {...this.state} />
+        <PostTable onRemove={this.removePost} {...this.props} {...this.state} />
       </div>
     );
   }

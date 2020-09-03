@@ -4,35 +4,40 @@ import TextField from "@material-ui/core/TextField";
 
 export default class InputButton extends React.Component {
   state = {
-    content: ""
-  }
+    content: "",
+  };
 
   render() {
-    const { placeholder="What do you wanna see?", buttonText = "Search", onClick } = this.props;
-    return(
+    const {
+      placeholder = "What do you wanna see?",
+      buttonText = "Search",
+      onClick,
+    } = this.props;
+    return (
       <>
         <Grid item sm={8} xs={12}>
           <TextField
             placeholder={placeholder}
-            defaultValue=""
             fullWidth
             value={this.state.content}
             onChange={(evt) => {
-              this.setState({ content: evt.target.value })
+              this.setState({ content: evt.target.value });
             }}
           />
         </Grid>
         <Grid item sm={4} xs={12}>
-          <Button 
+          <Button
             onClick={() => {
-              if (onClick) onClick(this.state.content);          
-            }} 
-            fullWidth variant="contained" color="primary"
+              if (onClick) onClick(this.state.content);
+            }}
+            fullWidth
+            variant="contained"
+            color="primary"
           >
             {buttonText}
           </Button>
         </Grid>
       </>
-    )
+    );
   }
 }

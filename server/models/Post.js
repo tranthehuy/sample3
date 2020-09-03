@@ -85,6 +85,18 @@ class PostClass {
 
     return editedPost;
   }
+
+  static async delete({ id }) {
+    const comment = await this.findById(id);
+
+    if (!comment) {
+      throw new Error("Not found");
+    }
+
+    const result = await this.deleteOne({ _id: id });
+
+    return result;
+  }
 }
 
 mongoSchema.loadClass(PostClass);

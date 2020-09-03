@@ -4,22 +4,33 @@ import notify from "../../lib/notifier";
 
 import withAuth from "../../lib/withAuth";
 import PostTable from "../../components/PostTable";
-import { getPostList } from "../../lib/api/admin";
+import { getPostList, deletePost } from "../../lib/api/admin";
 
 class IndexWithData extends React.Component {
   state = {
     posts: [],
   };
 
-  async componentDidMount() {
+  fetchData = async () => {
     try {
       const { posts } = await getPostList();
-
       this.setState({ posts }); // eslint-disable-line
     } catch (err) {
       notify(err);
     }
+  };
+
+  async componentDidMount() {
+    this.fetchData();
   }
+
+  removePost = (post) => {
+    deletePost(post)
+      .then(() => {
+        this.fetchData();
+      })
+      .catch((e) => notify(e.message));
+  };
 
   render() {
     return (
@@ -28,7 +39,7 @@ class IndexWithData extends React.Component {
           <title>Customer</title>
           <meta name="description" content="Settings for Customer" />
         </Head>
-        <PostTable {...this.props} {...this.state} />
+        <PostTable onRemove={this.removePost} {...this.props} {...this.state} />
       </div>
     );
   }

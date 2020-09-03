@@ -1,7 +1,6 @@
 const express = require("express");
 
 const Post = require("../models/Post");
-const User = require("../models/User");
 const Comment = require("../models/Comment");
 const logger = require("../logs");
 
@@ -26,7 +25,7 @@ router.get("/posts", async (req, res) => {
   }
 });
 
-router.post("/posts/add", async (req, res) => {
+router.post("/posts", async (req, res) => {
   try {
     const post = await Post.add(
       Object.assign({ userId: req.user.id }, req.body)
@@ -38,9 +37,23 @@ router.post("/posts/add", async (req, res) => {
   }
 });
 
-router.post("/posts/edit", async (req, res) => {
+router.put("/posts/:id", async (req, res) => {
   try {
-    const editedPost = await Post.edit(req.body);
+    const editedPost = await Post.edit(
+      Object.assign({ id: req.params.id }, req.body)
+    );
+    res.json(editedPost);
+  } catch (err) {
+    logger.error(err);
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
+router.delete("/posts/:id", async (req, res) => {
+  try {
+    const editedPost = await Post.delete(
+      Object.assign({ id: req.params.id }, req.body)
+    );
     res.json(editedPost);
   } catch (err) {
     logger.error(err);
@@ -52,22 +65,6 @@ router.get("/posts/detail/:slug", async (req, res) => {
   try {
     const post = await Post.getBySlug({ slug: req.params.slug });
     res.json(post);
-  } catch (err) {
-    res.json({ error: err.message || err.toString() });
-  }
-});
-
-router.post("/users/search", async (req, res) => {
-  const { query } = req.body;
-
-  if (!query) {
-    res.json({ error: "Empty query" });
-    return;
-  }
-
-  try {
-    const users = await User.search(query);
-    res.json({ users });
   } catch (err) {
     res.json({ error: err.message || err.toString() });
   }

@@ -119,11 +119,6 @@ export default class CommentList extends React.Component {
             <p key={c._id}>
               <i>Someone on {moment(c.createdAt).fromNow()} said: </i>{" "}
               {c.content}
-              <br />
-              <span style={{ fontSize: "80%", opacity: "0.9" }}>
-                <a onClick={() => this.editComment(c)}>Edit</a> |{" "}
-                <a onClick={() => this.deleteComment(c)}>Delete</a>
-              </span>
             </p>
           )
         )}

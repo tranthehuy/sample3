@@ -71,9 +71,8 @@ class CommentClass {
       throw new Error("Not found");
     }
 
-    const deletedComment = await this.deleteOne({ _id: id });
-
-    return deletedComment;
+    const result = await this.deleteOne({ _id: id });
+    return result;
   }
 }
 

@@ -22,6 +22,7 @@ class EditPost extends React.Component {
 
     this.state = {
       post: props.post || {},
+      sessionId: new Date().getTime(),
     };
   }
 
@@ -42,6 +43,15 @@ class EditPost extends React.Component {
     const { post, repos } = this.state;
     return (
       <div style={{ padding: "10px 45px" }}>
+        <div
+          style={{
+            minHeight: 320,
+            textAlign: "center",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: `url(https://source.unsplash.com/random/1080x720?nature,water,${this.state.sessionId}`,
+          }}
+        ></div>
         <br />
         <form onSubmit={this.onSubmit}>
           <div>
@@ -56,6 +66,7 @@ class EditPost extends React.Component {
               label="Post's title"
               style={styleTextField}
               required
+              fullWidth
             />
           </div>
           <br />
@@ -72,10 +83,13 @@ class EditPost extends React.Component {
             label="Content"
             className="textFieldInput"
             style={styleTextField}
+            fullWidth
+            multiline
+            rows={4}
           />
           <br />
           <br />
-          <Button variant="contained" type="submit">
+          <Button fullWidth variant="contained" type="submit">
             Save
           </Button>
         </form>

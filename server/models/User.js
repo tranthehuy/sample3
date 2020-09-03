@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const _ = require("lodash");
 const generateSlug = require("../utils/slugify");
-const logger = require("../logs");
 
 const { Schema } = mongoose;
 
@@ -37,32 +36,11 @@ const mongoSchema = new Schema({
   },
   displayName: String,
   avatarUrl: String,
-
-  purchasedBookIds: [String],
-  freeBookIds: [String],
-
-  isGithubConnected: {
-    type: Boolean,
-    default: false,
-  },
-  githubAccessToken: {
-    type: String,
-  },
 });
 
 class UserClass {
   static publicFields() {
-    return [
-      "id",
-      "displayName",
-      "email",
-      "avatarUrl",
-      "slug",
-      "isAdmin",
-      "isGithubConnected",
-      "purchasedBookIds",
-      "freeBookIds",
-    ];
+    return ["id", "displayName", "email", "avatarUrl", "slug", "isAdmin"];
   }
 
   static search(query) {
