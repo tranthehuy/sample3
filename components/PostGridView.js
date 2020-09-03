@@ -1,4 +1,5 @@
 import Grid from "@material-ui/core/Grid";
+import Pagination from "@material-ui/lab/Pagination";
 import InputButton from "../components/InputButton";
 import { section } from "../lib/SharedStyles";
 import notify from "../lib/notifier";
@@ -8,6 +9,7 @@ import PostCard from "./PostCard";
 export default class PostGridView extends React.Component {
   state = {
     posts: [],
+    pageIndex: 0,
   };
 
   fetchData = async (searchQuery) => {
@@ -24,6 +26,16 @@ export default class PostGridView extends React.Component {
   }
 
   render() {
+    const pageLength = 5;
+    const itemCount = (this.state.posts && this.state.posts.length - 0) || 0;
+    const pageCount = parseInt(itemCount / pageLength);
+
+    const itemIndexFrom = this.state.pageIndex * pageLength;
+    const itemIndexTo = (this.state.pageIndex + 1) * pageLength;
+
+    const renderedItems = this.state.posts.filter(
+      (e, i) => i >= itemIndexFrom && i < itemIndexTo
+    );
     return (
       <div style={{ padding: "10px 8%", fontSize: "15px", minHeight: "100vh" }}>
         <div style={section}>
@@ -39,6 +51,14 @@ export default class PostGridView extends React.Component {
             />
           </Grid>
         </div>
+        <div style={{ margin: 10 }}>
+          <Pagination
+            onChange={(event, page) => {
+              this.setState({ pageIndex: page - 1 });
+            }}
+            count={pageCount}
+          />
+        </div>
         <Grid
           spacing={1}
           container
@@ -46,7 +66,7 @@ export default class PostGridView extends React.Component {
           justify="space-around"
           align="flex-start"
         >
-          {this.state.posts.map((p) => (
+          {renderedItems.map((p) => (
             <Grid
               key={p.slug}
               item

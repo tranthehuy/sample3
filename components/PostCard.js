@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeReviewCard(props) {
   const { name, content, slug, createdAt } = props.data;
   const classes = useStyles();
-  console.log(`/posts/${slug}`);
   return (
     <Link href={`/posts/${slug}`}>
       <Card className={classes.root}>
